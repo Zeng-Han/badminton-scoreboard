@@ -1,2 +1,2 @@
-# web_development
-Web development course codes.
+# Badminton Scoreboard
+Scoreboard for badminton games.
