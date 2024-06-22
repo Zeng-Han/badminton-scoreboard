@@ -3,14 +3,55 @@
 
 <head>
   <meta charset="utf-8">
-  <title>羽球记分板 - Han</title>
+  <script src="preparation.js"></script>
+  <link rel="stylesheet" type="text/css" href="preparation.css">
+  <title>羽球记分板 - 准备页 - Han</title>
 </head>
 
 <body>
 
-<h1>Good morning!</h1>
-<span>Something is here.</span>
-<button type="button" onclick="alert('欢迎!')">点我!</button>
+<form method="post">
+
+  <!-- 比赛类型 -->
+  <div id="match_type">
+    <label>比赛类型:</label>
+    <input type="radio" id="singles" name="match_type" value="singles" checked onclick="matchTypeSwitched()">
+    <label for="singles">单打</label>
+    <input type="radio" id="doubles" name="match_type" value="doubles" onclick="matchTypeSwitched()">
+    <label for="doubles">双打</label>
+  </div>
+
+  <div id="singles_player_names">
+
+    <!-- 球员名输入框 -->
+    <label for="player_1">球员1：</label>
+    <input type="text" id="player_1" name="player_1" maxlength="6" placeholder="请输入球员名">
+    <label for="player_2">球员2：</label>
+    <input type="text" id="player_2" name="player_2" maxlength="6" placeholder="请输入球员名">
+
+  </div>
+
+  <div id="doubles_player_names">
+
+    <!-- 球员名输入框 -->
+    <label for="team_1_player_1">队伍1-球员1（左）：</label>
+    <input type="text" id="team_1_player_1" name="team_1_player_1" maxlength="6" placeholder="请输入球员名">
+    <label for="team_1_player_2">队伍1-球员2（右）：</label>
+    <input type="text" id="team_1_player_2" name="team_1_player_2" maxlength="6" placeholder="请输入球员名">
+
+    <br>
+
+    <label for="team_2_player_1">队伍2-球员1（右）：</label>
+    <input type="text" id="team_2_player_1" name="team_2_player_1" maxlength="6" placeholder="请输入球员名">
+    <label for="team_2_player_2">队伍2-球员2（左）：</label>
+    <input type="text" id="team_2_player_2" name="team_2_player_2" maxlength="6" placeholder="请输入球员名">
+
+  </div>
+
+  <!-- 提交按钮 -->
+  <input type="submit" value="开始比赛" onclick="formSubmitted(event)">
+
+</form>
 
 </body>
 
