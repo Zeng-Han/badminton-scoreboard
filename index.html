@@ -10,11 +10,12 @@
 
 <body>
 
-<form method="post">
+<div id="wrapper">
+  <form>
 
   <!-- 比赛类型 -->
   <div id="match_type">
-    <label>比赛类型:</label>
+    <label>比赛类型：</label>
     <input type="radio" id="singles" name="match_type" value="singles" checked onclick="matchTypeSwitched()">
     <label for="singles">单打</label>
     <input type="radio" id="doubles" name="match_type" value="doubles" onclick="matchTypeSwitched()">
@@ -26,6 +27,7 @@
     <!-- 球员名输入框 -->
     <label for="player_1">球员1：</label>
     <input type="text" id="player_1" name="player_1" maxlength="6" placeholder="请输入球员名">
+    <br>
     <label for="player_2">球员2：</label>
     <input type="text" id="player_2" name="player_2" maxlength="6" placeholder="请输入球员名">
 
@@ -49,9 +51,12 @@
   </div>
 
   <!-- 提交按钮 -->
-  <input type="submit" value="开始比赛" onclick="formSubmitted(event)">
+  <div id="submitButton">
+    <input type="submit" value="开始比赛" onclick="formSubmitted(event)">
+  </div>
 
 </form>
+</div>
 
 </body>
 

@@ -1,3 +1,55 @@
+html {
+    background: #F1F1F1;
+}
+
+div#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 div#doubles_player_names {
     display: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    font-size: 18px;
+}
+
+div#doubles_player_names div#singles_player_names {
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    margin: 10px auto;
+}
+
+input[type=text] {
+    margin: 10px auto;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #AAAAAA;
+}
+
+input[type=radio] {
+    margin: 10px;
+}
+
+input[type=submit] {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #AAAAAA;
+    background-color: #2BA245;
+    color: white;
 }
