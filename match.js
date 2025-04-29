@@ -22,8 +22,8 @@ window.onload = function() {
         console.log('player 2: ', PLAYER_2)
         let player_1_element = document.getElementById('team_1_player_right')
         let player_2_element = document.getElementById('team_2_player_right')
-        player_1_element.innerHTML = PLAYER_1
-        player_2_element.innerHTML = PLAYER_2
+        player_1_element.textContent = PLAYER_1
+        player_2_element.textContent = PLAYER_2
     } else {
         TEAM_1_PLAYER_1 = params.get('team_1_player_1')
         TEAM_1_PLAYER_2 = params.get('team_1_player_2')
@@ -37,10 +37,10 @@ window.onload = function() {
         let team_1_player_2_element = document.getElementById('team_1_player_right')
         let team_2_player_1_element = document.getElementById('team_2_player_right')
         let team_2_player_2_element = document.getElementById('team_2_player_left')
-        team_1_player_1_element.innerHTML = TEAM_1_PLAYER_1
-        team_1_player_2_element.innerHTML = TEAM_1_PLAYER_2
-        team_2_player_1_element.innerHTML = TEAM_2_PLAYER_1
-        team_2_player_2_element.innerHTML = TEAM_2_PLAYER_2
+        team_1_player_1_element.textContent = TEAM_1_PLAYER_1
+        team_1_player_2_element.textContent = TEAM_1_PLAYER_2
+        team_2_player_1_element.textContent = TEAM_2_PLAYER_1
+        team_2_player_2_element.textContent = TEAM_2_PLAYER_2
     }
 }
 
@@ -48,14 +48,18 @@ function addPoint(event) {
     let team_num = event.target.id.split('_')[1]
     console.log('add point: team ' + team_num)
     // get the current score
-    let score = parseInt(event.target.innerHTML)
+    let score = parseInt(event.target.textContent)
     // update the score
     let new_score = score + 1
-    event.target.innerHTML = new_score.toString()
+    event.target.textContent = new_score.toString()
     console.log('new score: ', new_score)
 
+    let opponent_team_num = team_num === '1' ? '2' : '1'
+    let opponent_score_ele = document.getElementById('team_' + opponent_team_num + '_score')
+    let opponent_score = parseInt(opponent_score_ele.textContent)
+
     // check if the game is over
-    if (new_score >= 21) {
+    if ((new_score >= 21 && new_score - opponent_score >= 2) || new_score === 30) {
         console.log('game over')
         console.log('winner: team ', team_num)
         // show the winner
@@ -103,9 +107,9 @@ function switchPlayers(team_num) {
     console.log('switch players: team ' + team_num)
     let player_left = document.getElementById('team_' + team_num + '_player_left')
     let player_right = document.getElementById('team_' + team_num + '_player_right')
-    let temp = player_left.innerHTML
-    player_left.innerHTML = player_right.innerHTML
-    player_right.innerHTML = temp
+    let temp = player_left.textContent
+    player_left.textContent = player_right.textContent
+    player_right.textContent = temp
 }
 
 function switchServeSign(serve_team) {
@@ -114,12 +118,18 @@ function switchServeSign(serve_team) {
     let serve_side_opposite = CURRENT_STATE === 0 ? 'left' : 'right'
     let serve_sign = document.getElementById('team_' + serve_team + '_sign_' + serve_side)
     let serve_sign_opposite = document.getElementById('team_' + serve_team + '_sign_' + serve_side_opposite)
-    serve_sign.innerHTML = '<img src="serve.svg" alt=""/>'  // show the serve sign
-    serve_sign_opposite.innerHTML = ''  // hide the serve sign
+    let img_serve = document.createElement('img');
+    img_serve.src = 'serve.svg';
+    img_serve.alt = '发球标志';
+    serve_sign.replaceChildren(img_serve);
+    serve_sign_opposite.textContent = ''  // hide the serve sign
 
     let receive_team = serve_team === '1' ? '2' : '1'
     let receive_sign = document.getElementById('team_' + receive_team + '_sign_' + serve_side)
     let receive_sign_opposite = document.getElementById('team_' + receive_team + '_sign_' + serve_side_opposite)
-    receive_sign.innerHTML = '<img src="receive.svg" alt=""/>'  // hide the receive sign
-    receive_sign_opposite.innerHTML = ''  // show the receive sign
+    let img_receive = document.createElement('img');
+    img_receive.src = 'receive.svg';
+    img_receive.alt = '接发球标志';
+    receive_sign.replaceChildren(img_receive);
+    receive_sign_opposite.textContent = ''  // hide the receive sign
 }
