@@ -44,6 +44,8 @@ window.onload = function() {
         team2Player1Element.textContent = TEAM_2_PLAYER_1
         team2Player2Element.textContent = TEAM_2_PLAYER_2
     }
+
+    syncSignBadgeState()
 }
 
 function addPoint(event) {
@@ -65,14 +67,14 @@ function addPoint(event) {
 
         if (teamNum === '1') {
             if (MATCH_TYPE === 'singles') {
-                alert(`比赛结束，${PLAYER_1}获胜！`)
+                alert(`\u6bd4\u8d5b\u7ed3\u675f\uff0c${PLAYER_1}\u83b7\u80dc\uff01`)
             } else {
-                alert(`比赛结束，${TEAM_1_PLAYER_1}/${TEAM_1_PLAYER_2}获胜！`)
+                alert(`\u6bd4\u8d5b\u7ed3\u675f\uff0c${TEAM_1_PLAYER_1}/${TEAM_1_PLAYER_2}\u83b7\u80dc\uff01`)
             }
         } else if (MATCH_TYPE === 'singles') {
-            alert(`比赛结束，${PLAYER_2}获胜！`)
+            alert(`\u6bd4\u8d5b\u7ed3\u675f\uff0c${PLAYER_2}\u83b7\u80dc\uff01`)
         } else {
-            alert(`比赛结束，${TEAM_2_PLAYER_1}/${TEAM_2_PLAYER_2}获胜！`)
+            alert(`\u6bd4\u8d5b\u7ed3\u675f\uff0c${TEAM_2_PLAYER_1}/${TEAM_2_PLAYER_2}\u83b7\u80dc\uff01`)
         }
 
         window.history.back()
@@ -117,7 +119,7 @@ function switchServeSign(serveTeam) {
 
     const imgServe = document.createElement('img')
     imgServe.src = 'serve.svg'
-    imgServe.alt = '发球标识'
+    imgServe.alt = '\u53d1\u7403\u6807\u8bc6'
     serveSign.replaceChildren(imgServe)
     serveSignOpposite.textContent = ''
 
@@ -127,7 +129,17 @@ function switchServeSign(serveTeam) {
 
     const imgReceive = document.createElement('img')
     imgReceive.src = 'receive.svg'
-    imgReceive.alt = '接发球标识'
+    imgReceive.alt = '\u63a5\u53d1\u7403\u6807\u8bc6'
     receiveSign.replaceChildren(imgReceive)
     receiveSignOpposite.textContent = ''
+
+    syncSignBadgeState()
+}
+
+function syncSignBadgeState() {
+    const signBoxes = document.querySelectorAll('.sign')
+    signBoxes.forEach((box) => {
+        const hasIcon = box.querySelector('img') !== null
+        box.classList.toggle('has-icon', hasIcon)
+    })
 }

@@ -33,7 +33,7 @@ function formSubmitted(event) {
         const player1 = document.getElementById('player_1').value.trim()
         const player2 = document.getElementById('player_2').value.trim()
         if (!player1 || !player2) {
-            alert('璇疯緭鍏ョ悆鍛樺悕')
+            alert('\u8bf7\u8f93\u5165\u7403\u5458\u540d')
             return
         }
 
@@ -48,7 +48,7 @@ function formSubmitted(event) {
         const team2Player2 = document.getElementById('team_2_player_2').value.trim()
 
         if (!team1Player1 || !team1Player2 || !team2Player1 || !team2Player2) {
-            alert('璇疯緭鍏ョ悆鍛樺悕')
+            alert('\u8bf7\u8f93\u5165\u7403\u5458\u540d')
             return
         }
 
@@ -64,4 +64,3 @@ function formSubmitted(event) {
 
     window.location.href = `match.html?${params.toString()}`
 }
-

@@ -68,8 +68,22 @@ body {
 }
 
 .sign {
-    border: 1px dashed #b7d5c1;
-    background: #eef8f1;
+    position: relative;
+    border: 1px dashed #b9d8c4;
+    background: #f7fcf9;
+}
+
+.sign.has-icon::before {
+    content: "";
+    width: min(86%, 54px);
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    background: linear-gradient(165deg, #2ea848, #207d36);
+    border: 1px solid rgba(255, 255, 255, 0.52);
+    box-shadow: 0 4px 10px rgba(26, 87, 45, 0.28);
+    position: absolute;
+    inset: 0;
+    margin: auto;
 }
 
 .score-container {
@@ -129,6 +143,17 @@ button.score-box:focus-visible {
     outline-offset: 2px;
 }
 
+.sign img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: min(74%, 36px);
+    max-width: 36px;
+    max-height: 36px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(18, 63, 32, 0.35));
+}
+
 img {
     width: min(48px, 62%);
     height: auto;
@@ -159,9 +184,9 @@ img {
     }
 
     .position-container {
-        grid-template-columns: 1fr 56px;
+        grid-template-columns: minmax(0, 1fr) 44px 44px minmax(0, 1fr);
         gap: 8px;
-        padding: 10px;
+        padding: 8px;
     }
 
     .position-box {
@@ -188,7 +213,44 @@ img {
         min-width: 28px;
     }
 
+    .sign.has-icon::before {
+        width: min(84%, 36px);
+    }
+
+    .sign img {
+        width: min(72%, 24px);
+        max-width: 24px;
+        max-height: 24px;
+    }
+
     img {
         width: min(34px, 66%);
+    }
+}
+
+@media (max-width: 420px) {
+    .position-container {
+        grid-template-columns: minmax(0, 1fr) 38px 38px minmax(0, 1fr);
+        gap: 6px;
+        padding: 6px;
+    }
+
+    .position-box {
+        min-height: 64px;
+        padding: 6px;
+    }
+
+    .player {
+        font-size: 15px;
+    }
+
+    .sign.has-icon::before {
+        width: min(82%, 30px);
+    }
+
+    .sign img {
+        width: min(70%, 20px);
+        max-width: 20px;
+        max-height: 20px;
     }
 }
