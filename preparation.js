@@ -4,68 +4,64 @@ window.onload = function() {
 
 function matchTypeSwitched() {
     console.log('match type switched')
-    // get the match type
-    let radios = document.getElementsByName('match_type')
-    let match_type = radios[0].checked ? 'singles' : 'doubles'
-    if (match_type === 'singles') {
+    const radios = document.getElementsByName('match_type')
+    const matchType = radios[0].checked ? 'singles' : 'doubles'
+
+    const doublesNames = document.getElementById('doubles_player_names')
+    const singlesNames = document.getElementById('singles_player_names')
+
+    if (matchType === 'singles') {
         console.log('switched to singles')
-        // hide doubles player names and show singles player names
-        let doubles_names = document.getElementById('doubles_player_names')
-        let singles_names = document.getElementById('singles_player_names')
-        doubles_names.style.display = 'none'
-        singles_names.style.display = 'block'
+        doublesNames.style.display = 'none'
+        singlesNames.style.display = 'grid'
     } else {
         console.log('switched to doubles')
-        // hide singles player names and show doubles player names
-        let singles_names = document.getElementById('singles_player_names')
-        let doubles_names = document.getElementById('doubles_player_names')
-        singles_names.style.display = 'none'
-        doubles_names.style.display = 'block'
+        singlesNames.style.display = 'none'
+        doublesNames.style.display = 'grid'
     }
 }
 
 function formSubmitted(event) {
-    // prevent the form from submitting by default
     event.preventDefault()
 
     console.log('form submitted')
-    // get the match type
-    let radios = document.getElementsByName('match_type')
-    let match_type = radios[0].checked ? 'singles' : 'doubles'
-    if (match_type === 'singles') {
-        console.log('match type: singles')
-    } else {
-        console.log('match type: doubles')
-    }
-    // get the player names
-    let next_url = 'match.html?match_type=' + match_type // the URL to redirect to
-    if (match_type === 'singles') {
-        let player_1 = document.getElementById('player_1').value
-        let player_2 = document.getElementById('player_2').value
-        if (!player_1 || !player_2) {
-            alert('请输入球员名！')
+    const radios = document.getElementsByName('match_type')
+    const matchType = radios[0].checked ? 'singles' : 'doubles'
+    const params = new URLSearchParams({ match_type: matchType })
+
+    if (matchType === 'singles') {
+        const player1 = document.getElementById('player_1').value.trim()
+        const player2 = document.getElementById('player_2').value.trim()
+        if (!player1 || !player2) {
+            alert('璇疯緭鍏ョ悆鍛樺悕')
             return
         }
-        console.log('player 1: ', player_1)
-        console.log('player 2: ', player_2)
-        next_url = next_url + '&player_1=' + player_1 + '&player_2=' + player_2
+
+        console.log('player 1: ', player1)
+        console.log('player 2: ', player2)
+        params.set('player_1', player1)
+        params.set('player_2', player2)
     } else {
-        let team_1_player_1 = document.getElementById('team_1_player_1').value
-        let team_1_player_2 = document.getElementById('team_1_player_2').value
-        let team_2_player_1 = document.getElementById('team_2_player_1').value
-        let team_2_player_2 = document.getElementById('team_2_player_2').value
-        if (!team_1_player_1 || !team_1_player_2 || !team_2_player_1 || !team_2_player_2) {
-            alert('请输入球员名！')
+        const team1Player1 = document.getElementById('team_1_player_1').value.trim()
+        const team1Player2 = document.getElementById('team_1_player_2').value.trim()
+        const team2Player1 = document.getElementById('team_2_player_1').value.trim()
+        const team2Player2 = document.getElementById('team_2_player_2').value.trim()
+
+        if (!team1Player1 || !team1Player2 || !team2Player1 || !team2Player2) {
+            alert('璇疯緭鍏ョ悆鍛樺悕')
             return
         }
-        console.log('team 1 player 1: ', team_1_player_1)
-        console.log('team 1 player 2: ', team_1_player_2)
-        console.log('team 2 player 1: ', team_2_player_1)
-        console.log('team 2 player 2: ', team_2_player_2)
-        next_url = next_url + '&team_1_player_1=' + team_1_player_1 +
-            '&team_1_player_2=' + team_1_player_2 +
-            '&team_2_player_1=' + team_2_player_1 +
-            '&team_2_player_2=' + team_2_player_2
+
+        console.log('team 1 player 1: ', team1Player1)
+        console.log('team 1 player 2: ', team1Player2)
+        console.log('team 2 player 1: ', team2Player1)
+        console.log('team 2 player 2: ', team2Player2)
+        params.set('team_1_player_1', team1Player1)
+        params.set('team_1_player_2', team1Player2)
+        params.set('team_2_player_1', team2Player1)
+        params.set('team_2_player_2', team2Player2)
     }
-    window.open(next_url, '_self')
+
+    window.location.href = `match.html?${params.toString()}`
 }
+
